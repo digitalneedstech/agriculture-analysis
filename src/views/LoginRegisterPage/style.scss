@@ -1,0 +1,14 @@
+.login-register-page{
+    position: relative;
+    height: 100vh;
+    background-color: #001529;
+    width: 100vW;
+
+    .ant-card{
+        width:50%;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -30%);
+    }
+}
