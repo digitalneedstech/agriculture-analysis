@@ -8,11 +8,13 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import useToken from "../hooks/useToken";
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
 export default function MenuSider(props) {
+  const { token, setToken } = useToken();
   return (
     <Sider
       collapsible
@@ -54,6 +56,12 @@ export default function MenuSider(props) {
           <span>Settings</span>
           <Link to="/home/settings"></Link>
         </Menu.Item>
+        <SubMenu key="sub4" icon={<TeamOutlined />} title="User & Roles">
+          <Menu.Item key="13"><Link to="/home/users"></Link>Users</Menu.Item>
+          <Menu.Item key="14"><Link to="/home/roles"></Link>Roles</Menu.Item>
+          <Menu.Item key="15"><Link to="/home/priviledges"></Link>Priviledges</Menu.Item>
+          
+        </SubMenu>
       </Menu>
     </Sider>
   );

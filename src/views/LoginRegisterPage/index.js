@@ -15,14 +15,14 @@ const tabListNoTitle = [
     },
   ];
   
-  const contentListNoTitle = {
-    login: <Login />,
-    register: <Register />,
-  };
+  
 
 function LoginRegisterPage() {
     const [activeTabKey, setActiveTabKey] = useState('login');
-  
+  const contentListNoTitle = {
+    login: <Login/>,
+    register: <Register />,
+  };
     const onTabChange = key => {
       setActiveTabKey(key);
     };

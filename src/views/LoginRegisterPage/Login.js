@@ -1,12 +1,30 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
   let navigate = useNavigate();
+  const { token, setToken } = useToken();
+  async function loginUser(credentials) {
+    return fetch('http://localhost:8080/api/users/'+credentials.username+"/"+credentials.password, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(data => data.json())
+   }
 
   const onFinish = (values) => {
     console.log("Success:", values);
-    navigate("/home");
+    loginUser({
+      username:"test",
+      password:"xyz"
+    }).then((val)=>{
+      localStorage.setItem('token', JSON.stringify(val));
+      navigate("/home");
+    });
+    
   };
 
   const onFinishFailed = (errorInfo) => {
