@@ -5,13 +5,18 @@ import {
   Select,
   InputNumber,
   Switch,
+  Result,
 } from "antd";
+import ResultWidget from "../error";
 
 const AddNewUser = (props) => {
   const [formValues, setFormValues] = useState({});
   const [rolesList,setRolesList]=useState([]);
+  const [departmentList,setDepartmentList]=useState([]);
   const [selectedRole,setSelectedRole]=useState(-1);
+  const [selectedDepartment,setSelectedDepartment]=useState(-1);
   const [loading, setLoading] = useState(false);
+    const [error,setError]=useState("");
   useEffect(()=>{
     fetch('http://localhost:8080/api/data/roles')
     .then((response)=>response.json())
@@ -19,6 +24,13 @@ const AddNewUser = (props) => {
       console.log(response);
       setRolesList(response);
       setSelectedRole(response[0].id);
+    });
+    fetch('http://localhost:8080/api/metadata/depts')
+    .then((response)=>response.json())
+    .then((response)=>{
+      console.log(response);
+      setDepartmentList(response);
+      setSelectedDepartment(response[0].id);
     });
   },[])
   const onFinish = (values) => {
@@ -36,9 +48,19 @@ const AddNewUser = (props) => {
   fetch('http://localhost:8080/api/users', requestOptions)
   .then((response)=>response.json())
   .then((response)=>{
-    console.log(response);
+    if(response.status && response.status!=200){
+        setLoading(false);
+        setError("Invalid request");
+        console.log("failure");
+    }else{
+        
+        console.log("success");
+        console.log(response);
     setLoading(false);
+    setError("");
     props.onSubmitSuccess();
+    }
+    
   }).catch((err)=>{   
     props.onSubmitFailure();
   });
@@ -50,6 +72,12 @@ const AddNewUser = (props) => {
     });
   };
   console.log(formValues);
+  const update=()=>{
+      setError("");
+  }
+  if(error!=""){
+      return (<ResultWidget update={update}></ResultWidget>)
+  };
   return (
     <Form
       labelCol={{
@@ -72,6 +100,15 @@ const AddNewUser = (props) => {
       <Form.Item label="Display Name" name="display_name">
         <Input />
       </Form.Item>
+      {departmentList.length>0 ?
+      <Form.Item label="Department" name="user_department">
+      <Select
+            value={selectedDepartment}
+            >
+            {departmentList.map((depart) => <Select.Option key={depart.id} value={depart.id} >{depart.name}</Select.Option>)}
+            </Select>
+        
+      </Form.Item> :<></>}
       {rolesList.length>0 ?
       <Form.Item label="Roles" name="role_ids">
       <Select mode="multiple"

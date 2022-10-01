@@ -19,6 +19,12 @@ const UserPriviledges = (props) => {
           dataIndex: 'functionality_name',
           key: 'functionality_name',
           render: (text) => <span>{text}</span>,
+        },
+        {
+          title: 'Action',
+          dataIndex: 'action',
+          key: 'action',
+          render: (text) => <span>{text}</span>,
         }
       ];
     return (

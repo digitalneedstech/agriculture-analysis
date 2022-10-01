@@ -6,15 +6,20 @@ import {
   InputNumber,
   Switch,
 } from "antd";
+import ResultWidget from "../../error";
 
 const AddNewPriviledge = (props) => {
   const [formValues, setFormValues] = useState({});
   const [loading, setLoading] = useState(false);
+  const [error,setError]=useState("");
   const onFinish = (values) => {
     console.log("Success:", values);
     setLoading(true);
     saveUser(values)
   };
+  const update=()=>{
+    setError("");
+}
   async function saveUser(value){
 
     const requestOptions = {
@@ -25,9 +30,19 @@ const AddNewPriviledge = (props) => {
   fetch('http://localhost:8080/api/data/priviledges', requestOptions)
   .then((response)=>response.json())
   .then((response)=>{
-    console.log(response);
-    setLoading(false);
-    props.onSubmitSuccess();
+    
+    if(response.status && response.status!=200){
+      setLoading(false);
+      setError("Invalid request");
+      console.log("failure");
+  }else{
+      
+      console.log("success");
+      console.log(response);
+  setLoading(false);
+  setError("");
+  props.onSubmitSuccess();
+  }
   }).catch((err)=>{   
     props.onSubmitFailure();
   });
@@ -39,6 +54,9 @@ const AddNewPriviledge = (props) => {
     });
   };
   console.log(formValues);
+  if(error!=""){
+    return (<ResultWidget update={update}></ResultWidget>)
+};
   return (
     <Form
       labelCol={{
