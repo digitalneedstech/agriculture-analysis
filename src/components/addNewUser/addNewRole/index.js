@@ -7,6 +7,7 @@ import {
   Switch,
 } from "antd";
 import ResultWidget from "../../error";
+import { API_URL } from "../../../routes/constants";
 
 const AddNewRole = (props) => {
   const [formValues, setFormValues] = useState({});
@@ -15,7 +16,7 @@ const AddNewRole = (props) => {
   const [error,setError]=useState("");
   const [loading, setLoading] = useState(false);
   useEffect(()=>{
-    fetch('http://localhost:8080/api/data/priviledges')
+    fetch(API_URL+'/data/priviledges')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
@@ -35,7 +36,7 @@ const AddNewRole = (props) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(value)
   };
-  fetch('http://localhost:8080/api/data/roles', requestOptions)
+  fetch(API_URL+'/data/roles', requestOptions)
   .then((response)=>response.json())
   .then((response)=>{
     if(response.status && response.status!=200){

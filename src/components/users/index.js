@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {
     Table
 } from "antd";
+import { API_URL } from "../../routes/constants";
 
 
 const UsersList = (props) => {
@@ -11,7 +12,7 @@ const UsersList = (props) => {
         reload();
       },[]);
       async function reload(){
-        fetch('http://localhost:8080/api/users/'+id)
+        fetch(API_URL+'/users/'+id)
         .then((response)=>response.json())
         .then((response)=>{
           console.log(response);

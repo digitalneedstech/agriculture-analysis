@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {
     Table
 } from "antd";
+import { API_URL } from "../../routes/constants";
 
 
 const AnimalMilkData = (props) => {
@@ -11,7 +12,7 @@ const AnimalMilkData = (props) => {
         reload();
       },[]);
       async function reload(){
-        fetch('http://localhost:8080/api/production/animals/'+id)
+        fetch(API_URL+'/production/animals/'+id)
         .then((response)=>response.json())
         .then((response)=>{
           console.log(response);

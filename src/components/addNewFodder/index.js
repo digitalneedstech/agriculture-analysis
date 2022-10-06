@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Form, Select, Button, InputNumber} from "antd";
+import { API_URL } from "../../routes/constants";
 
 const AddNewFodder = (props) => {
     const [fodderList, setFodderList] = useState([]);
@@ -35,7 +36,7 @@ const AddNewFodder = (props) => {
             },
             body: JSON.stringify(value)
         };
-        fetch('http://localhost:8080/api/expense/fodder', requestOptions).then((response) => response.json()).then((response) => {
+        fetch(API_URL+'/expense/fodder', requestOptions).then((response) => response.json()).then((response) => {
             console.log(response);
             setLoading(false);
             props.onSubmitSuccess();
@@ -44,7 +45,7 @@ const AddNewFodder = (props) => {
         });
     }
     useEffect(() => {
-        fetch('http://localhost:8080/api/metadata/fodderTypes').then((response) => response.json()).then((response) => {
+        fetch(API_URL+'/metadata/fodderTypes').then((response) => response.json()).then((response) => {
             console.log(response);
             setFodderList(response);
             setSelectedFodder(response[0].id);
@@ -59,7 +60,7 @@ const AddNewFodder = (props) => {
     }
     useEffect(() => {
         if (selectedFodder != "") {
-            fetch('http://localhost:8080/api/metadata/fodder/' + selectedFodder + '/subTypes').then((response) => response.json()).then((response) => {
+            fetch(API_URL+'/metadata/fodder/' + selectedFodder + '/subTypes').then((response) => response.json()).then((response) => {
                 console.log(response);
                 setFodderCatList(response);
                 formValues["fodder_sub_cat_id"] = response[0].id;

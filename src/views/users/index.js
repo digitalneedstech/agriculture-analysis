@@ -3,6 +3,7 @@ import { Modal, Button,Form,
   Input,Space,Table } from "antd";
 import UserPriviledges from "../../components/users/priviledges";
 import AddNewUser from "../../components/addNewUser";
+import { API_URL } from "../../routes/constants";
 
 function Users(props) {
   const [modalVisible, setModalVisble] = useState(false);
@@ -15,7 +16,7 @@ function Users(props) {
     reload();
   },[]);
   async function reload(){
-    fetch('http://localhost:8080/api/users')
+    fetch(API_URL+'/users')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
@@ -31,7 +32,7 @@ function Users(props) {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
   };
-  fetch('http://localhost:8080/api/data/users/'+idToBeDeleted,requestOptions)
+  fetch(API_URL+'/data/users/'+idToBeDeleted,requestOptions)
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);

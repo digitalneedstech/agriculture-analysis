@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal, Button,Form,
   Input,Space,Table } from "antd";
 import AddNewPriviledge from "../../components/addNewUser/addNewPriviledge";
+import { API_URL } from "../../routes/constants";
 
 function Priviledges(props) {
   const [modalVisible, setModalVisble] = useState(false);
@@ -11,7 +12,7 @@ function Priviledges(props) {
     reload();
   },[]);
   async function reload(){
-    fetch('http://localhost:8080/api/data/priviledges')
+    fetch(API_URL+'/data/priviledges')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
@@ -27,7 +28,7 @@ function Priviledges(props) {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
   };
-  fetch('http://localhost:8080/api/data/users/'+idToBeDeleted,requestOptions)
+  fetch(API_URL+'/data/users/'+idToBeDeleted,requestOptions)
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);

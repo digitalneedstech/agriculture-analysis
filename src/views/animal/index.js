@@ -4,6 +4,7 @@ import { Modal, Button,Form,
 import AddNewAnimal from "~/components/addNewAnimal";
 import AddMilkData from "../../components/addMilkData";
 import AnimalMilkData from "../../components/animalMilkData";
+import { API_URL } from "../../routes/constants";
 
 function Animal(props) {
   const [modalVisible, setModalVisble] = useState(false);
@@ -15,7 +16,7 @@ function Animal(props) {
     reload();
   },[]);
   async function reload(){
-    fetch('http://localhost:8080/api/data/animals')
+    fetch(API_URL+'/data/animals')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
@@ -31,7 +32,7 @@ function Animal(props) {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
   };
-  fetch('http://localhost:8080/api/data/animals/'+idToBeDeleted,requestOptions)
+  fetch(API_URL+'/data/animals/'+idToBeDeleted,requestOptions)
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);

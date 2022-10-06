@@ -6,6 +6,7 @@ import {
   InputNumber,
   Switch,
 } from "antd";
+import { API_URL } from "../../routes/constants";
 
 const AddNewAnimal = (props) => {
   const [formValues, setFormValues] = useState({});
@@ -25,13 +26,13 @@ const AddNewAnimal = (props) => {
   }
   const handleChangeSelectedAnimal=(value)=>{
     setSelectedAnimal(value);
-    fetch('http://localhost:8080/api/metadata/animal/'+value+'/subTypes')
+    fetch(API_URL+'/metadata/animal/'+value+'/subTypes')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
       setAnimalSubTypesList(response);
       setSelectedSubAnimal(response[0].id);
-      fetch('http://localhost:8080/api/metadata/animal/'+value+'/subCategories')
+      fetch(API_URL+'/metadata/animal/'+value+'/subCategories')
         .then((response)=>response.json())
         .then((response)=>{
           console.log(response);
@@ -43,7 +44,7 @@ const AddNewAnimal = (props) => {
     });
   }
   useEffect(()=>{
-    fetch('http://localhost:8080/api/metadata/animalTypes')
+    fetch(API_URL+'/metadata/animalTypes')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
@@ -64,7 +65,7 @@ const AddNewAnimal = (props) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(value)
   };
-  fetch('http://localhost:8080/api/data/animal', requestOptions)
+  fetch(API_URL+'/data/animal', requestOptions)
   .then((response)=>response.json())
   .then((response)=>{
     console.log(response);

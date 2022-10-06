@@ -5,6 +5,7 @@ import {
     Button,
     InputNumber
 } from "antd";
+import { API_URL } from "../../routes/constants";
 
 const AddFodderProd = (props) => {
     const [formValues, setFormValues] = useState({});
@@ -25,7 +26,7 @@ const AddFodderProd = (props) => {
             },
             body: JSON.stringify(value)
         };
-        fetch('http://localhost:8080/api/production/fodders/' + id, requestOptions).then((response) => response.json()).then((response) => {
+        fetch(API_URL+'/production/fodders/' + id, requestOptions).then((response) => response.json()).then((response) => {
             console.log(response);
             setLoading(false);
             props.onSubmitSuccess();

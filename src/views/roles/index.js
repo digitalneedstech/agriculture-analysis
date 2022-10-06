@@ -3,6 +3,7 @@ import { Modal, Button,Form,
   Input,Space,Table } from "antd";
 import AddNewRole from "../../components/addNewUser/addNewRole";
 import RolePriviledgesList from "../../components/role/priviledges";
+import { API_URL } from "../../routes/constants";
 
 function Roles(props) {
   const [modalVisible, setModalVisble] = useState(false);
@@ -13,7 +14,7 @@ function Roles(props) {
     reload();
   },[]);
   async function reload(){
-    fetch('http://localhost:8080/api/data/roles')
+    fetch(API_URL+'/data/roles')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
@@ -29,7 +30,7 @@ function Roles(props) {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
   };
-  fetch('http://localhost:8080/api/data/users/'+idToBeDeleted,requestOptions)
+  fetch(API_URL+'/data/users/'+idToBeDeleted,requestOptions)
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);

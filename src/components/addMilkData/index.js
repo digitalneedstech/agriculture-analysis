@@ -4,6 +4,7 @@ import {
     Input,
     Button
 } from "antd";
+import { API_URL } from "../../routes/constants";
 
 const AddMilkData = (props) => {
     const [formValues, setFormValues] = useState({});
@@ -24,7 +25,7 @@ const AddMilkData = (props) => {
             },
             body: JSON.stringify(value)
         };
-        fetch('http://localhost:8080/api/production/animals/' + id, requestOptions).then((response) => response.json()).then((response) => {
+        fetch(API_URL+'/production/animals/' + id, requestOptions).then((response) => response.json()).then((response) => {
             console.log(response);
             setLoading(false);
             props.onSubmitSuccess();

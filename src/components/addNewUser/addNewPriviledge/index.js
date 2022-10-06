@@ -7,6 +7,7 @@ import {
   Switch,
 } from "antd";
 import ResultWidget from "../../error";
+import { API_URL } from "../../../routes/constants";
 
 const AddNewPriviledge = (props) => {
   const [formValues, setFormValues] = useState({});
@@ -27,7 +28,7 @@ const AddNewPriviledge = (props) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(value)
   };
-  fetch('http://localhost:8080/api/data/priviledges', requestOptions)
+  fetch(API_URL+'/data/priviledges', requestOptions)
   .then((response)=>response.json())
   .then((response)=>{
     

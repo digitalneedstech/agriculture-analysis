@@ -8,6 +8,7 @@ import {
   Result,
 } from "antd";
 import ResultWidget from "../error";
+import { API_URL } from "../../routes/constants";
 
 const AddNewUser = (props) => {
   const [formValues, setFormValues] = useState({});
@@ -18,14 +19,14 @@ const AddNewUser = (props) => {
   const [loading, setLoading] = useState(false);
     const [error,setError]=useState("");
   useEffect(()=>{
-    fetch('http://localhost:8080/api/data/roles')
+    fetch(API_URL+'/data/roles')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
       setRolesList(response);
       setSelectedRole(response[0].id);
     });
-    fetch('http://localhost:8080/api/metadata/depts')
+    fetch(API_URL+'/metadata/depts')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
@@ -45,7 +46,7 @@ const AddNewUser = (props) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(value)
   };
-  fetch('http://localhost:8080/api/users', requestOptions)
+  fetch(API_URL+'/users', requestOptions)
   .then((response)=>response.json())
   .then((response)=>{
     if(response.status && response.status!=200){

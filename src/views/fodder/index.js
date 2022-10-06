@@ -4,6 +4,7 @@ import AddNewFodder from "../../components/addNewFodder";
 import FodderList from "../../components/fodderList";
 import AddFodderProd from "../../components/addFodderProd";
 import FodderProdData from "../../components/fodderProdData";
+import { API_URL } from "../../routes/constants";
 function Fodder(props) {
   const [modalVisible, setModalVisble] = useState(false);
   const [animalData,setAnimalData]=useState([]);
@@ -15,7 +16,7 @@ function Fodder(props) {
     reload();
   },[]);
   async function reload(){
-    fetch('http://localhost:8080/api/expense/fodders')
+    fetch(API_URL+'/expense/fodders')
     .then((response)=>response.json())
     .then((response)=>{
       console.log(response);
