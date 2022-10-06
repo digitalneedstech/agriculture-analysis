@@ -7,7 +7,7 @@ const Login = () => {
   let navigate = useNavigate();
   const { token, setToken } = useToken();
   async function loginUser(credentials) {
-    return fetch(API_URL+'/api/users/'+credentials.username+"/"+credentials.password, {
+    return fetch(API_URL+'/users/'+credentials.username+"/"+credentials.password, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
