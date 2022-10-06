@@ -7,8 +7,7 @@ const {Header} = Layout;
 export default function HeaderComp(props) {
     const navigate = useNavigate();
     const logout=()=>{
-        localStorage.removeItem("token");
-        Navigate("/login");
+        
     }
     return <Header className="white-background header">
         <h1 style={
@@ -16,6 +15,10 @@ export default function HeaderComp(props) {
                 padding: 10 + 'px'
             }
         }>Agriculture Project</h1>
-        <Button onClick={()=>logout}>Logout </Button>
+        <Button onClick={
+                        () => {
+                            localStorage.removeItem("token");
+        Navigate("/login");
+                        }}>Logout </Button>
     </Header>;
 }
