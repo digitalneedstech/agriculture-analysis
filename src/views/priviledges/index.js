@@ -40,21 +40,9 @@ function Priviledges(props) {
 
   const columns = [
     {
-      title: 'Screen Name',
-      dataIndex: 'screen_name',
-      key: 'screen_name',
-      render: (text) => <a>{text}</a>,
-    },
-    {
       title: 'Functionality Name',
       dataIndex: 'functionality_name',
       key: 'functionality_name',
-      render: (text) => <a>{text}</a>,
-    },
-    {
-      title: 'Action',
-      dataIndex: 'action',
-      key: 'action',
       render: (text) => <a>{text}</a>,
     }
   ];
@@ -82,7 +70,7 @@ function Priviledges(props) {
             setModalVisble(true);
           }}
         >
-          Add New Role
+          Add New Priviledge
         </Button>
         <Table
         columns={columns} dataSource={animalData} />

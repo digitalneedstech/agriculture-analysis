@@ -71,13 +71,7 @@ const AddNewPriviledge = (props) => {
       onFinish={onFinish}
       labelWrap
     >
-      <Form.Item label="Screen Name" name="screen_name">
-        <Input />
-      </Form.Item>
       <Form.Item label="Functionality Name" name="functionaliy_name">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Action" name="action">
         <Input />
       </Form.Item>
       <Form.Item
